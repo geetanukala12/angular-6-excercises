@@ -1,28 +1,40 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl  } from '@angular/forms';
+import { AuthenticationService } from './services/authentication.service';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [AuthenticationService]
 })
 export class AppComponent {
-  title = 'demo';
   submitted = false;
 
-  loginForm = new FormGroup({
-    email: new FormControl(),
-    password: new FormControl()
-  });
+  langs:string[] = [
+    'English',
+    'French',
+    'Telugu',
+  ];
+  email: string; 
+  first_name:string;
+  last_name:string;
+  password:String
+
+  constructor(private authenticationService: AuthenticationService){
+      authenticationService = authenticationService;
+  }
+    
   onSubmit() {
-      console.log(this.loginForm)
-      this.submitted = true;
-      console.log("email is"+this.loginForm.controls.email.value)
-      console.log("password is"+this.loginForm.controls.password.value)
+     //register user
+    console.log("email is"+this.email)
+    console.log("password is"+this.password)
+    console.log("first name is"+this.first_name)
+    console.log("last name is"+this.last_name)
+    this.submitted = true;
   }
 
   login(email:string, password:string){
-    
+    //login method
   }
 }
