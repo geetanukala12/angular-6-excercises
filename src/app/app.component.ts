@@ -17,8 +17,8 @@ export class AppComponent {
     'Telugu',
   ];
   email: string; 
-  first_name:string;
-  last_name:string;
+  firstname:string;
+  lastname:string;
   password:String
 
   constructor(private authenticationService: AuthenticationService){
@@ -29,8 +29,8 @@ export class AppComponent {
      //register user
     console.log("email is"+this.email)
     console.log("password is"+this.password)
-    console.log("first name is"+this.first_name)
-    console.log("last name is"+this.last_name)
+    console.log("first name is"+this.firstname)
+    console.log("last name is"+this.lastname)
     this.submitted = true;
   }
 

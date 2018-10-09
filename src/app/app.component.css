@@ -6,3 +6,9 @@ h1{
     width:200px;
     margin: 0px auto;
 }
+.has-error{
+    border: 1px solid red;
+}
+.has-success{
+    border: 1px solid green;
+}
