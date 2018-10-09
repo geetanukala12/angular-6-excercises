@@ -1,59 +1,20 @@
-<h3 align="center">Login</h3>
-<div class="row login_div">
-  <form  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
-    <fieldset ngModelGroup="name">
-      <div class="form-group">
-        <label>First Name</label>
-        <input type="text"
-               class="form-control" name="firstname" [(ngModel)]="firstname" #firstName="ngModel" required minlength="8" [ngClass]="{
-                'has-error': f.submitted && firstName?.invalid ,
-                'has-success': f.submitted && firstName?.valid}">
-                <!-- if we assign the names to ngModel like  #firstName="ngModel", then we can directly use these names for accessing the elements -->
-      </div>
+  <!-- <app-root> -->
   
-      <div class="form-group">
-        <label>Last Name</label>
-        <input type="text"
-               class="form-control" name="lastname" [(ngModel)]="lastname" #lastName="ngModel" required minlength="8" [ngClass]="{
-                'has-error': f.submitted && lastName?.invalid ,
-                'has-success': f.submitted && lastName?.valid}">
-      </div>
-    </fieldset>
   
-    <div class="form-group">
-      <label>Email</label>
-      <input type="email"
-             class="form-control" name="email" [(ngModel)]="email" #Email="ngModel"
-             required
-             pattern="[^ @]*@[^ @]*" [ngClass]="{
-              'has-error': f.submitted && Email?.invalid ,
-              'has-success': f.submitted && Email?.valid }">
-    </div>
-  
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password"
-             class="form-control" name="password" [(ngModel)]="password" #passWord="ngModel" minlength="8" required [ngClass]="{
-              'has-error': f.submitted && passWord?.invalid,
-              'has-success': f.submitted && passWord?.valid}">
-    </div>
-  
-    <div class="form-group">
-      <label>Language</label>
-      <select class="form-control" name="language" ngModel>
-        <option value="">Please select a language</option>
-        <option *ngFor="let lang of langs"
-                [value]="lang">
-                {{lang}}
-        </option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-  </form>
+  <router-outlet>
+      <div align="center">
+          <h3>Welcome to dashboard</h3>
+          <div class="content">
+            <nav>
+              <a routerLink="/registration" routerLinkActive="active"><button class="button">Register</button></a>
+              <a routerLink="/login" routerLinkActive="active"><button class="button">Login</button></a>
+            </nav>
+          </div>
+        </div>
+    </router-outlet> 
 
-  <!-- <pre>{{f.value | json}}</pre> -->
+<!-- </app-root> -->
 
-  </div>
 
 
   
