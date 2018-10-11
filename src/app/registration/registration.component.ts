@@ -21,9 +21,9 @@ export class RegistrationComponent implements OnInit {
   email: string; 
   firstname:string;
   lastname:string;
-  password:String
+  password:String;
 
-  showLayout:boolean;
+  showUserData:boolean;
 
   constructor(private authenticationService: AuthenticationService, private route: Router){
       authenticationService = authenticationService;
@@ -32,7 +32,7 @@ export class RegistrationComponent implements OnInit {
     
   onSubmit() {
     sessionStorage.setItem("user",this.email)
-    this.showLayout = true;
+    this.showUserData = true;
      //register user
     console.log("email is"+this.email)
     console.log("password is"+this.password)

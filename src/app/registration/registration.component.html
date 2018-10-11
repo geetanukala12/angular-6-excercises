@@ -9,6 +9,7 @@
                class="form-control" name="firstname" [(ngModel)]="firstname" #firstName="ngModel" required minlength="8" [ngClass]="{
                 'has-error': f.submitted && firstName?.invalid ,
                 'has-success': f.submitted && firstName?.valid}">
+                <div *ngIf="f.submitted && firstName?.invalid" class="error">FirstName is required</div>
                 <!-- if we assign the names to ngModel like  #firstName="ngModel", then we can directly use these names for accessing the elements -->
       </div>
   
@@ -18,6 +19,7 @@
                class="form-control" name="lastname" [(ngModel)]="lastname" #lastName="ngModel" required minlength="8" [ngClass]="{
                 'has-error': f.submitted && lastName?.invalid ,
                 'has-success': f.submitted && lastName?.valid}">
+                <div *ngIf="f.submitted && lastName?.invalid" class="error">LastName is required</div>
       </div>
     </fieldset>
   
@@ -29,6 +31,8 @@
              pattern="[^ @]*@[^ @]*" [ngClass]="{
               'has-error': f.submitted && Email?.invalid ,
               'has-success': f.submitted && Email?.valid }">
+      <div *ngIf="f.submitted && Email?.invalid" class="error">Email is required</div>
+
     </div>
   
     <div class="form-group">
@@ -37,6 +41,7 @@
              class="form-control" name="password" [(ngModel)]="password" #passWord="ngModel" minlength="8" required [ngClass]="{
               'has-error': f.submitted && passWord?.invalid,
               'has-success': f.submitted && passWord?.valid}">
+        <div *ngIf="f.submitted && passWord?.invalid" class="error">Password is required</div>
     </div>
   
     <div class="form-group">
