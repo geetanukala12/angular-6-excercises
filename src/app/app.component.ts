@@ -13,12 +13,12 @@ import { userService } from './services/user.service';
 })
 
 export class AppComponent{
+  public data:any;
   constructor(private http: HttpClient, userservice : userService){
     //read local json data
-    let userlist = require('./json/userlist.json');
-    console.log(userlist.data)
-
-    console.log(userservice.getUserList());
-    
+    this.data = require('./json/userlist.json');
+    console.log(this.data.data)
   }
+
 }
+
