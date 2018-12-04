@@ -10,12 +10,18 @@ import { LoginComponent } from './login/login.component';
 import { routingModule } from './app.routing';
 import { RegistrationComponent } from './registration/registration.component';
 import { userService } from './services/user.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { UserComponent } from './user/user.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DashboardComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -24,8 +30,9 @@ import { userService } from './services/user.service';
     HttpClientModule,
     HttpModule,
     routingModule,
-    DataTableModule
-  ],
+    DataTableModule,
+    NgbModule
+    ],
   providers: [userService],
   bootstrap: [AppComponent]
 })

@@ -2,3 +2,16 @@
 
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
+
+li{
+    margin-right: 15px;
+}
+
+@media (min-width: 720px){
+    .container {
+        max-width: 400px !important;
+    }
+    .margin-right{
+        margin-right:5px;
+    }
+}

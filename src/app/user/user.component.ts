@@ -1,32 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
-export class LoginComponent implements OnInit {
-  public data:any;
+export class UserComponent implements OnInit {
+  public myGroup:any;
 
-  constructor(private http:HttpClient, private router:Router) { 
+  constructor(private http:HttpClient, private router:Router) { }
+
+  ngOnInit() { 
+    this.myGroup = new FormGroup({
+      // firstName: new FormControl()
+    });
     
-  }
-
-  ngOnInit() {
-
-  }
-
-  email:string;
-  password:string;
-  UserResponse:any;
-
-  onSubmit(){
-    this.UserResponse =  this.http.post("http://localhost:3000/authenticate", 
+      var userdata =  this.http.post("http://localhost:3000/authenticate", 
         {
-            "email": this.email,
-            "password": this.password
+            "userId": localStorage.getItem("userId")
         },
         {
           headers:{
@@ -36,8 +30,6 @@ export class LoginComponent implements OnInit {
         }).subscribe(
         (val) => {
           if(val){
-            sessionStorage.setItem('user', '1');
-            this.router.navigate(['/dashboard']);
             //console.log("POST call successful value returned in body", val);
           }
         },
@@ -47,5 +39,8 @@ export class LoginComponent implements OnInit {
         () => {
             console.log("The POST observable is now completed.");
         });
+
+        this.myGroup.setValue(userdata);
   }
+
 }
