@@ -21,9 +21,12 @@ export class LoginComponent implements OnInit {
   email:string;
   password:string;
   UserResponse:any;
+  isValid : boolean;
+  isClicked : boolean = false;
 
   onSubmit(){
-    this.UserResponse =  this.http.post("http://localhost:3000/authenticate", 
+    this.isClicked = true;
+    this.UserResponse =  this.http.post("http://localhost:3004/authenticate", 
         {
             "email": this.email,
             "password": this.password
@@ -35,11 +38,15 @@ export class LoginComponent implements OnInit {
           }
         }).subscribe(
         (val) => {
-          if(val){
-            sessionStorage.setItem('user', '1');
-            this.router.navigate(['/dashboard']);
-            //console.log("POST call successful value returned in body", val);
-          }
+              // if(val.hasOwnProperty('status')){
+              //       if(val.status == true){
+                      this.isValid =  true;
+                      sessionStorage.setItem('user', '1');
+                      this.router.navigate(['/dashboard']);
+          //           }else{
+          //             this.isValid =  false;
+          //           }
+          // }
         },
         response => {
             console.log("POST call in error", response);
@@ -47,5 +54,7 @@ export class LoginComponent implements OnInit {
         () => {
             console.log("The POST observable is now completed.");
         });
+
+        console.log(this.isValid)
   }
 }

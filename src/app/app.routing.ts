@@ -12,6 +12,6 @@ const routes :Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'login', component: LoginComponent },
     { path: 'registration', component: RegistrationComponent },
-    { path: 'edit-user', component: UserComponent }
+    { path: 'edit-user', component: RegistrationComponent }
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);

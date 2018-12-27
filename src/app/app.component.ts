@@ -4,8 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { userService } from './services/user.service';
 import { Router } from '@angular/router';
-import { ComponentFactoryResolver } from '@angular/core/src/render3';
-import { DataTable } from 'angular-6-datatable';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -20,22 +19,21 @@ export class AppComponent{
   public userdata:any;
   public visibility:string;
 
-  constructor(private http: HttpClient, userservice : userService, public router: Router){
+  constructor(private http: HttpClient, userservice : userService, public router: Router, public location: Location ){
       this.router = router; 
-
-      this.http.get('http://localhost:3002/allusers').subscribe(data => {
-          this.data = data;  
-          console.log(data);
-      });
   }
 
-  ngOnInit() {
-    console.log(sessionStorage.getItem("user"))
-    if(sessionStorage.getItem("user") != null){
-      this.visibility = "1";
-    }else{
-      this.router.navigate(['/login']);
-    }
+  ngOnInit (){
+         if(location.pathname == '/dashboard'){
+            this.http.get('http://localhost:3004/allusers').subscribe(data => {
+                this.data = data;  
+                  if(sessionStorage.getItem("user") != null){
+                    this.visibility = "1";
+                  }else{
+                    this.router.navigate(['/login']);
+                  }
+            });
+          }
   }
 
   logout(){
@@ -44,7 +42,7 @@ export class AppComponent{
   }
 
   deleteUser(){
-    confirm("are you sure?")
+    confirm("Are you sure? do you want to delete the user?")
   }
 
   edit(userObj){

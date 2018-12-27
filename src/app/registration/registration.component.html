@@ -1,9 +1,20 @@
+<nav class="navbar navbar-inverse" >
+    <div class="container-fluid">
+        <div class="navbar-header">
+        <a class="navbar-brand" href="/dashboard">Dashboard</a>
+        </div>
+    <ul class="nav navbar-nav navbar-right">
+    <li ng-show="!visibility"><a href="#" (click)="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+        </div>
+  </nav>
+
 <div class="container">
   <div class="registration-form">
       <div class="main-div">
           <div class="panel">
-            <h2>Registration Form</h2>
-            <p>Please enter all the fields</p>
+            <h2>{{this.title}}</h2>
+            <p *ngIf="title == 'Registration'">Please enter all the fields</p>
          </div>
          <form  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
             <div class="form-group">
@@ -35,6 +46,17 @@
                 <div *ngIf="f.submitted && Email?.invalid" class="error">Email is required</div>
           
               </div>
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="Phone"
+                       class="form-control" name="phone" [(ngModel)]="phone" #Phone="ngModel"
+                       required 
+                       [ngClass]="{
+                        'has-error': f.submitted && Phone?.invalid ,
+                        'has-success': f.submitted && Phone?.valid }">
+                <div *ngIf="f.submitted && Phone?.invalid" class="error">Phone is required</div>
+          
+              </div>
             
               <div class="form-group">
                 <label>Password</label>
@@ -56,8 +78,8 @@
                 </select>
               </div>
               <span>
-                  <button type="submit" class="btn btn-primary margin-right">Register</button>
-                  <a href="/">Go to home page</a>
+                  <button type="submit" class="btn btn-primary margin-right">Save</button>
+                  <a href="/" *ngIf="title == 'Registration'">Go to home page</a>
               </span>
           </form>
           </div>

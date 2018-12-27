@@ -2,7 +2,7 @@
     <nav class="navbar navbar-inverse" *ngIf="router.url == '/dashboard'">
             <div class="container-fluid">
                 <div class="navbar-header">
-                <a class="navbar-brand" href="#">Dashboard</a>
+                <a class="navbar-brand">Dashboard</a>
                 </div>
             <ul class="nav navbar-nav navbar-right">
             <li ng-show="!visibility"><a href="#" (click)="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -11,11 +11,11 @@
     </nav>
    <router-outlet>
     <div align="center" *ngIf="router.url == '/dashboard'">
-        <table class="table table-striped"  [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5" style="width:800px !important;margin:auto 0px;margin-top:30px;" align="center">
+        <table class="table table-striped"  [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5" style="width:1156px !important;margin:auto 0px;margin-top:30px;" align="center">
         <thead>
         <tr>
             <th style="width: 12%">
-                <mfDefaultSorter by="name">Name</mfDefaultSorter>
+                <mfDefaultSorter by="">S.NO</mfDefaultSorter>
             </th>
             <th style="width: 12%">
                 <mfDefaultSorter by="name">Name</mfDefaultSorter>
@@ -40,7 +40,7 @@
             <td class="text-right">{{item.mobile}}</td>
             <td>{{item.city | uppercase}}</td>
             <td colspan="2"><button class="btn" (click)="deleteUser(item)"> Delete</button>
-                <button class="btn" (click)="edit(item)" style="margin-left: 20px;"> Edit</button></td>
+                <button class="btn" (click)="edit(item)"  style="margin-left: 20px;"> Edit</button></td>
         </tr>
         </tbody>
         <tfoot>

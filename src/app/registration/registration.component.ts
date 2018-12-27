@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '.././services/authentication.service';
 import { Router } from '@angular/router';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -21,29 +21,51 @@ export class RegistrationComponent implements OnInit {
   email: string; 
   firstname:string;
   lastname:string;
-  password:String;
+  password:string;
+  phone:string;
+  title:string = 'Registration';
 
   showUserData:boolean;
 
-  constructor(private authenticationService: AuthenticationService, private route: Router){
+  constructor(private authenticationService: AuthenticationService, private router: Router, private http:HttpClient){
       authenticationService = authenticationService;
-      route = route;
+      router = router;
   }
     
   onSubmit() {
-    sessionStorage.setItem("user",this.email)
-    this.showUserData = true;
-     //register user
-    console.log("email is"+this.email)
-    console.log("password is"+this.password)
-    console.log("first name is"+this.firstname)
-    console.log("last name is"+this.lastname)
-    this.submitted = true;
-    //this.route.navigate(['login']);
-    this.route.navigate(['']);
+      sessionStorage.setItem("user",this.email)
+      this.showUserData = true;
+      //register user
+      this.submitted = true;
+      var userdata =  this.http.post("http://localhost:3004/registration", 
+      {
+            "data":{
+              "email":this.email,"password":this.password,"first_name":this.firstname,"last_name":this.lastname, "phone":this.phone
+            }
+      },
+      {
+        headers:{
+          'Access-Control-Allow-Origin':"*",
+          'Access-Control-Allow-Methods':"GET, POST, OPTIONS, PUT, PATCH, DELETE"
+        }
+      }).subscribe(
+      (val) => {
+        if(val){
+          sessionStorage.setItem('user', '1');
+          this.router.navigate(['/dashboard']);
+        }
+      },
+      response => {
+          console.log("POST call in error", response);
+      },
+      () => {
+          console.log("The POST observable is now completed.");
+      });
   }
 
   ngOnInit(){
-    
+    if(this.router.url == '/edit-user'){
+        this.title  = "Edit User";
+    }
   }
 }
