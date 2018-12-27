@@ -21,10 +21,10 @@ export class AppComponent{
 
   constructor(private http: HttpClient, userservice : userService, public router: Router, public location: Location ){
       this.router = router; 
+      this.location = location;
   }
 
   ngOnInit (){
-         if(location.pathname == '/dashboard'){
             this.http.get('http://localhost:3004/allusers').subscribe(data => {
                 this.data = data;  
                   if(sessionStorage.getItem("user") != null){
@@ -33,7 +33,6 @@ export class AppComponent{
                     this.router.navigate(['/login']);
                   }
             });
-          }
   }
 
   logout(){
