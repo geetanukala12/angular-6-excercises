@@ -4,14 +4,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { userService } from './services/user.service';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [AuthenticationService]
+  providers: [AuthenticationService, userService]
 })
 
 export class AppComponent{
@@ -19,9 +17,9 @@ export class AppComponent{
   public userdata:any;
   public visibility:string;
 
-  constructor(private http: HttpClient, userservice : userService, public router: Router, public location: Location ){
+  constructor(private http: HttpClient, userservice : userService, public router: Router, private util:userService){
       this.router = router; 
-      this.location = location;
+      this.util = util;
   }
 
   ngOnInit (){
@@ -33,11 +31,6 @@ export class AppComponent{
                     this.router.navigate(['/login']);
                   }
             });
-  }
-
-  logout(){
-    this.visibility = "0";
-    sessionStorage.removeItem("user");
   }
 
   deleteUser(){

@@ -38,15 +38,15 @@ export class LoginComponent implements OnInit {
           }
         }).subscribe(
         (val) => {
-              // if(val.hasOwnProperty('status')){
-              //       if(val.status == true){
+              if(val.hasOwnProperty('status')){
+                    if(val.status == true){
                       this.isValid =  true;
                       sessionStorage.setItem('user', '1');
                       this.router.navigate(['/dashboard']);
-          //           }else{
-          //             this.isValid =  false;
-          //           }
-          // }
+                    }else{
+                      this.isValid =  false;
+                    }
+          }
         },
         response => {
             console.log("POST call in error", response);

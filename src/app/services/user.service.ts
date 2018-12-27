@@ -13,6 +13,10 @@ export class userService{
         return this.http.get('../src/app/json/userlist.json').subscribe(data => console.log(data));
         
     }
-    
+   
+  logout(){
+    this.visibility = "0";
+    sessionStorage.removeItem("user");
+  }
 
 }

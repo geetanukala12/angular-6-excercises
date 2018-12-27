@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '.././services/authentication.service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { userService } from '.././services/user.service';
 
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
+  providers: [AuthenticationService, userService]
+
 })
 export class RegistrationComponent implements OnInit {
 
@@ -27,9 +30,10 @@ export class RegistrationComponent implements OnInit {
 
   showUserData:boolean;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router, private http:HttpClient){
-      authenticationService = authenticationService;
-      router = router;
+  constructor(private authenticationService: AuthenticationService, private router: Router, private http:HttpClient, private util:userService){
+      this.authenticationService = authenticationService;
+      this.router = router;
+      this.util = util;
   }
     
   onSubmit() {
